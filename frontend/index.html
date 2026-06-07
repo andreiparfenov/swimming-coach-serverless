@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Swimming Coach AI</title>
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --blue: #1b6ca8;
+        --blue-dark: #145487;
+        --blue-muted: #6baed6;
+        --blue-faint: #ebf5fb;
+        --text: #1c2333;
+        --muted: #6b7280;
+        --border: #d1d5db;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial,
+          sans-serif;
+        background: #fff;
+        color: var(--text);
+        line-height: 1.6;
+        max-width: 660px;
+        margin: 0 auto;
+        padding: 2.5rem 1.25rem 5rem;
+      }
+
+      /* ── Header ── */
+      header {
+        display: flex;
+        align-items: center;
+        gap: 1.25rem;
+        padding-bottom: 1.5rem;
+        margin-bottom: 2.5rem;
+        border-bottom: 2px solid var(--blue);
+      }
+
+      header h1 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+
+      header p {
+        font-size: 0.85rem;
+        color: var(--muted);
+        margin-top: 0.1rem;
+      }
+
+      /* ── Form ── */
+      form {
+        display: grid;
+        gap: 0.9rem;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.9rem;
+      }
+
+      @media (max-width: 440px) {
+        .row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      label {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+
+      select,
+      textarea {
+        font-size: 0.9rem;
+        font-family: inherit;
+        color: var(--text);
+        background: #fff;
+        border: 1px solid var(--border);
+        border-radius: 3px;
+        padding: 0.5rem 0.75rem;
+        width: 100%;
+        transition:
+          border-color 0.15s,
+          box-shadow 0.15s;
+      }
+
+      select {
+        appearance: none;
+        -webkit-appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%236b7280'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 0.75rem center;
+        padding-right: 2.25rem;
+        cursor: pointer;
+      }
+
+      textarea {
+        resize: vertical;
+        min-height: 5rem;
+        font-weight: 400;
+        text-transform: none;
+        letter-spacing: 0;
+      }
+
+      select:focus,
+      textarea:focus {
+        outline: none;
+        border-color: var(--blue);
+        box-shadow: 0 0 0 3px rgba(27, 108, 168, 0.12);
+      }
+
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      button {
+        padding: 0.6rem 1.4rem;
+        background: var(--blue);
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        font-size: 0.9rem;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+        cursor: pointer;
+        transition: background 0.15s;
+        flex-shrink: 0;
+      }
+
+      button:hover:not(:disabled) {
+        background: var(--blue-dark);
+      }
+      button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      #status {
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      #status.error {
+        color: #b91c1c;
+      }
+
+      /* ── Lane rope divider ── */
+      .lane-rope {
+        display: block;
+        width: 100%;
+        height: 8px;
+        margin: 2rem 0;
+        background-image:
+          radial-gradient(circle, var(--blue-muted) 2.5px, transparent 2.5px),
+          linear-gradient(to right, #c5dce8, #c5dce8);
+        background-size:
+          14px 8px,
+          100% 1px;
+        background-repeat: repeat-x, no-repeat;
+        background-position:
+          7px center,
+          0 center;
+      }
+
+      /* ── Results ── */
+      #results {
+        margin-top: 2.5rem;
+      }
+
+      .plan-summary {
+        font-size: 0.9rem;
+        color: var(--muted);
+        margin-bottom: 0.25rem;
+      }
+
+      .week-title {
+        display: flex;
+        align-items: baseline;
+        gap: 0.6rem;
+        font-size: 1rem;
+        font-weight: 700;
+        margin-bottom: 1.1rem;
+      }
+
+      .badge {
+        font-size: 0.65rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        padding: 0.15rem 0.45rem;
+        border-radius: 2px;
+        background: var(--blue-faint);
+        color: var(--blue);
+      }
+
+      .session {
+        margin-bottom: 1.5rem;
+        padding-left: 1rem;
+        border-left: 2px solid var(--blue-faint);
+      }
+
+      .session-title {
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--blue);
+        margin-bottom: 0.6rem;
+      }
+
+      .phase-label {
+        font-size: 0.68rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--muted);
+        margin-top: 0.6rem;
+        margin-bottom: 0.2rem;
+      }
+
+      .sets {
+        list-style: none;
+      }
+
+      .set {
+        font-size: 0.875rem;
+        padding: 0.1rem 0;
+      }
+
+      .set::before {
+        content: "· ";
+        color: var(--blue-muted);
+      }
+
+      .coaching-note {
+        margin-top: 0.8rem;
+        font-size: 0.82rem;
+        color: var(--muted);
+        font-style: italic;
+        line-height: 1.55;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <!-- Swimming pool, top-down view, 8 lanes, architectural style -->
+      <svg
+        viewBox="0 0 180 80"
+        width="108"
+        height="48"
+        xmlns="http://www.w3.org/2000/svg"
+        aria-hidden="true"
+        style="flex-shrink: 0"
+      >
+        <rect width="180" height="80" fill="#D6EAF5" />
+        <rect
+          x="2"
+          y="2"
+          width="176"
+          height="76"
+          fill="none"
+          stroke="#2271B3"
+          stroke-width="4"
+        />
+        <g stroke="#7BB8D8" stroke-width="1.25" stroke-dasharray="5,4">
+          <line x1="0" y1="10" x2="180" y2="10" />
+          <line x1="0" y1="20" x2="180" y2="20" />
+          <line x1="0" y1="30" x2="180" y2="30" />
+          <line x1="0" y1="40" x2="180" y2="40" />
+          <line x1="0" y1="50" x2="180" y2="50" />
+          <line x1="0" y1="60" x2="180" y2="60" />
+          <line x1="0" y1="70" x2="180" y2="70" />
+        </g>
+      </svg>
+      <div>
+        <h1>Swimming Coach</h1>
+        <p>Generate a personalised multi-week training plan</p>
+      </div>
+    </header>
+
+    <form id="form">
+      <div class="row">
+        <label
+          >Level
+          <select name="level">
+            <option value="beginner">Beginner</option>
+            <option value="intermediate" selected>Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+        </label>
+        <label
+          >Goal
+          <select name="goal">
+            <option value="endurance" selected>Endurance</option>
+            <option value="speed">Speed</option>
+            <option value="technique">Technique</option>
+            <option value="race_prep">Race prep</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label
+          >Sessions per week
+          <select name="sessions_per_week">
+            <option value="2">2</option>
+            <option value="3" selected>3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+          </select>
+        </label>
+        <label
+          >Session duration
+          <select name="session_duration_minutes">
+            <option value="30">30 min</option>
+            <option value="45">45 min</option>
+            <option value="60" selected>60 min</option>
+            <option value="90">90 min</option>
+          </select>
+        </label>
+      </div>
+
+      <div class="row">
+        <label
+          >Pool length
+          <select name="pool_length">
+            <option value="25" selected>25 m</option>
+            <option value="50">50 m</option>
+          </select>
+        </label>
+        <label
+          >Plan length
+          <select name="weeks">
+            <option value="1">1 week</option>
+            <option value="2">2 weeks</option>
+            <option value="4" selected>4 weeks</option>
+            <option value="8">8 weeks</option>
+          </select>
+        </label>
+      </div>
+
+      <label
+        style="
+          text-transform: none;
+          letter-spacing: 0;
+          font-size: 0.8rem;
+          font-weight: 600;
+          color: var(--muted);
+        "
+      >
+        Notes
+        <span style="font-weight: 400; font-size: 0.75rem">optional</span>
+        <textarea
+          name="notes"
+          placeholder="e.g. focus on turns, no breaststroke, preparing for a 1500m open water race"
+        ></textarea>
+      </label>
+
+      <div class="actions">
+        <button type="submit" id="btn">Generate plan</button>
+        <span id="status"></span>
+      </div>
+    </form>
+
+    <div id="results"></div>
+
+    <script>
+      const API_URL = "http://localhost:8000";
+
+      document.getElementById("form").addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById("btn");
+        const status = document.getElementById("status");
+        const results = document.getElementById("results");
+
+        btn.disabled = true;
+        status.className = "";
+        status.textContent = "Generating your plan… (15–20s)";
+        results.innerHTML = "";
+
+        const fd = new FormData(e.target);
+        const payload = {
+          level: fd.get("level"),
+          goal: fd.get("goal"),
+          sessions_per_week: Number(fd.get("sessions_per_week")),
+          session_duration_minutes: Number(fd.get("session_duration_minutes")),
+          pool_length: Number(fd.get("pool_length")),
+          weeks: Number(fd.get("weeks")),
+          notes: fd.get("notes") || "",
+        };
+
+        try {
+          const res = await fetch(`${API_URL}/generate-plan`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          if (!res.ok) {
+            const body = await res.json().catch(() => ({}));
+            throw new Error(body.detail || `HTTP ${res.status}`);
+          }
+          renderPlan(await res.json());
+          status.textContent = "";
+        } catch (err) {
+          status.className = "error";
+          status.textContent = `Error: ${err.message}`;
+        } finally {
+          btn.disabled = false;
+        }
+      });
+
+      function renderPlan(plan) {
+        const el = document.getElementById("results");
+        let html = `<p class="plan-summary">${esc(plan.summary)}</p>`;
+
+        plan.weeks.forEach((week, i) => {
+          if (i > 0) html += `<span class="lane-rope"></span>`;
+          html += `
+        <div class="week">
+          <div class="week-title">
+            Week ${week.week_number} — ${esc(week.theme)}
+            <span class="badge">${esc(week.intensity)}</span>
+          </div>
+          ${week.sessions.map(renderSession).join("")}
+        </div>`;
+        });
+
+        el.innerHTML = html;
+      }
+
+      function renderSession(s) {
+        const phases = [
+          { key: "warmup", label: "Warm-up" },
+          { key: "main_set", label: "Main set" },
+          { key: "cooldown", label: "Cool-down" },
+        ];
+
+        const body = phases
+          .map(({ key, label }) => {
+            const sets = s[key];
+            if (!sets || sets.length === 0) return "";
+            const items = sets
+              .map((set) => {
+                const rest = set.rest_seconds
+                  ? ` (${set.rest_seconds}s rest)`
+                  : "";
+                return `<li class="set">${set.reps} \xd7 ${set.lengths_per_rep} lengths — ${esc(set.description)}${rest}</li>`;
+              })
+              .join("");
+            return `<div class="phase-label">${label}</div><ul class="sets">${items}</ul>`;
+          })
+          .join("");
+
+        const note = s.coaching_note
+          ? `<p class="coaching-note">${esc(s.coaching_note)}</p>`
+          : "";
+
+        return `
+      <div class="session">
+        <div class="session-title">${esc(s.day_label)} \xb7 ${s.total_lengths} lengths</div>
+        ${body}
+        ${note}
+      </div>`;
+      }
+
+      function esc(str) {
+        return String(str)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+    </script>
+  </body>
+</html>
