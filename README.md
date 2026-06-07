@@ -45,16 +45,16 @@ LLM inference goes through Nebius Token Factory. No GPU quota needed for the end
 
 **Request body:**
 
-| Field | Type | Values | Default |
-|---|---|---|---|
-| `level` | string | `beginner` / `intermediate` / `advanced` | required |
-| `goal` | string | `endurance` / `speed` / `technique` / `race_prep` | required |
-| `sessions_per_week` | int | 2–6 | required |
-| `session_duration_minutes` | int | 30–120 | required |
-| `pool_length` | int | `25` / `50` | `25` |
-| `stroke_focus` | string | e.g. `freestyle`, `mixed` | `freestyle` |
-| `weeks` | int | 1–12 | `4` |
-| `notes` | string | free text | `""` |
+| Field                      | Type   | Values                                            | Default     |
+| -------------------------- | ------ | ------------------------------------------------- | ----------- |
+| `level`                    | string | `beginner` / `intermediate` / `advanced`          | required    |
+| `goal`                     | string | `endurance` / `speed` / `technique` / `race_prep` | required    |
+| `sessions_per_week`        | int    | 2–6                                               | required    |
+| `session_duration_minutes` | int    | 30–120                                            | required    |
+| `pool_length`              | int    | `25` / `50`                                       | `25`        |
+| `stroke_focus`             | string | e.g. `freestyle`, `mixed`                         | `freestyle` |
+| `weeks`                    | int    | 1–12                                              | `4`         |
+| `notes`                    | string | free text                                         | `""`        |
 
 **Example request:**
 
@@ -72,6 +72,7 @@ curl -X POST https://<your-endpoint>/generate-plan \
 ```
 
 **Response:** A `TrainingPlan` object with:
+
 - `summary` — one-line plan description
 - `weeks[]` — week-by-week breakdown, each with:
   - `theme` and `intensity`
@@ -99,11 +100,11 @@ Then open [http://localhost:8000/docs](http://localhost:8000/docs) for the inter
 
 ## Environment variables
 
-| Variable | Description | Default |
-|---|---|---|
-| `NEBIUS_API_KEY` | Nebius Token Factory API key | required |
-| `TOKENFACTORY_BASE_URL` | Token Factory endpoint URL | `https://api.tokenfactory.us-central1.nebius.com/v1` |
-| `MODEL_ID` | Model to use for all pipeline steps | `meta-llama/Llama-3.3-70B-Instruct` |
+| Variable                | Description                         | Default                                   |
+| ----------------------- | ----------------------------------- | ----------------------------------------- |
+| `NEBIUS_API_KEY`        | Nebius Token Factory API key        | required                                  |
+| `TOKENFACTORY_BASE_URL` | Token Factory endpoint URL          | `https://api.tokenfactory.nebius.com/v1/` |
+| `MODEL_ID`              | Model to use for all pipeline steps | `meta-llama/Llama-3.3-70B-Instruct`       |
 
 ## Project structure
 
