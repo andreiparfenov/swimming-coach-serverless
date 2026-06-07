@@ -15,7 +15,7 @@ MODEL_ID="${MODEL_ID:-meta-llama/Llama-3.3-70B-Instruct}"
 FULL_IMAGE="docker.io/$DOCKER_USER/$IMAGE_NAME:$IMAGE_TAG"
 
 echo "▶ Building Docker image..."
-docker build -t "$IMAGE_NAME" .
+docker buildx build --platform linux/amd64 -t "$DOCKER_USER/$IMAGE_NAME:$IMAGE_TAG" --push 
 echo "✓ Build complete"
 
 echo "▶ Tagging as $FULL_IMAGE..."
@@ -33,8 +33,6 @@ echo "▶ Creating Nebius endpoint..."
 nebius ai endpoint create \
   --name "$ENDPOINT_NAME" \
   --image "$FULL_IMAGE" \
-  --container-command "uvicorn" \
-  --args "app.main:app --host 0.0.0.0 --port $CONTAINER_PORT" \
   --platform cpu-d3 \
   --preset 8vcpu-32gb \
   --public \
