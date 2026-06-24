@@ -9,10 +9,14 @@ CONTAINER_PORT=8000
 
 TOKENFACTORY_BASE_URL="https://api.tokenfactory.nebius.com/v1/"
 MODEL_ID="meta-llama/Llama-3.3-70B-Instruct"
+S3_BUCKET="${S3_BUCKET:-swim-program}"
+S3_ENDPOINT_URL="${S3_ENDPOINT_URL:-https://storage.eu-north1.nebius.cloud}"
 
 FULL_IMAGE="docker.io/$DOCKER_USER/$IMAGE_NAME:$IMAGE_TAG"
 
 : "${NEBIUS_API_KEY:?Set NEBIUS_API_KEY in your shell first (export NEBIUS_API_KEY=...)}"
+: "${S3_ACCESS_KEY:?Set S3_ACCESS_KEY in your shell first (export S3_ACCESS_KEY=...)}"
+: "${S3_SECRET_KEY:?Set S3_SECRET_KEY in your shell first (export S3_SECRET_KEY=...)}"
 
 echo "▶ Building and pushing image..."
 docker buildx build --platform linux/amd64 -t "$FULL_IMAGE" --push .
@@ -33,7 +37,11 @@ nebius ai endpoint create \
   --subnet-id "$SUBNET_ID" \
   --env "NEBIUS_API_KEY=$NEBIUS_API_KEY" \
   --env "TOKENFACTORY_BASE_URL=$TOKENFACTORY_BASE_URL" \
-  --env "MODEL_ID=$MODEL_ID"
+  --env "MODEL_ID=$MODEL_ID" \
+  --env "S3_ACCESS_KEY=$S3_ACCESS_KEY" \
+  --env "S3_SECRET_KEY=$S3_SECRET_KEY" \
+  --env "S3_BUCKET=$S3_BUCKET" \
+  --env "S3_ENDPOINT_URL=$S3_ENDPOINT_URL"
 
 echo "✓ Endpoint creation requested"
 

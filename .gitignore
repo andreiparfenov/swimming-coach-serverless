@@ -16,3 +16,7 @@ build/
 # IDE
 .idea/
 .vscode/
+
+# Local job output (the canonical copy lives in app/data/ and Object Storage)
+job/knowledge_base.json
+*.pkg

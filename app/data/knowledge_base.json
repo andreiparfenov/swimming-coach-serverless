@@ -1,0 +1,737 @@
+{
+  "version": "1.0",
+  "description": "Curated swimming training principles for AI-assisted plan generation. Derived from publicly available USMS training guidelines, British Swimming coach education materials, and established sports science literature on swimming periodization.",
+  "generated_by": "swimcoach-data-job / meta-llama/Llama-3.3-70B-Instruct",
+  "zones": {
+    "z1": "Aerobic \u2014 comfortable, conversational effort. Develops aerobic base and technique.",
+    "z2": "Threshold \u2014 comfortably hard, sustained effort. Builds lactate threshold and race pace endurance.",
+    "z3": "High intensity \u2014 hard, unsustainable beyond short efforts. Develops speed and power."
+  },
+  "profiles": {
+    "beginner_endurance": {
+      "level": "beginner",
+      "goal": "endurance",
+      "volume_per_session_lengths": {
+        "min": 20,
+        "max": 36
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 80,
+        "z2_threshold_pct": 0,
+        "z3_speed_pct": 0,
+        "drill_technique_pct": 20
+      },
+      "periodization": {
+        "pattern": "2 weeks progressive load, 1 week consolidation",
+        "max_weekly_volume_increase_pct": 10,
+        "deload_volume_multiplier": 0.85
+      },
+      "session_structure": {
+        "warmup_pct": 25,
+        "main_set_pct": 60,
+        "cooldown_pct": 15
+      },
+      "rep_length_range": [
+        1,
+        4
+      ],
+      "rest_seconds": {
+        "easy": 20,
+        "moderate": 30,
+        "hard": 45
+      },
+      "recommended_drills": [
+        {
+          "name": "catch-up drill",
+          "purpose": "timing and stroke coordination"
+        },
+        {
+          "name": "kickboard kick",
+          "purpose": "leg strength and horizontal body position"
+        },
+        {
+          "name": "fingertip drag",
+          "purpose": "high elbow recovery pattern"
+        },
+        {
+          "name": "side kick",
+          "purpose": "balance and hip rotation"
+        }
+      ],
+      "key_principles": [
+        "Prioritise water confidence and basic technique over volume",
+        "Keep rest intervals generous (20\u201330s) so technique does not break down",
+        "Short reps (1\u20134 lengths) allow full technique focus on each rep",
+        "At least one kick-focused set per session to build leg strength",
+        "Increase volume before increasing intensity"
+      ],
+      "coaching_summary": "For a beginner swimmer aiming to build endurance, training sessions should comprise 20-36 lengths of a 25m pool, with an intensity balance of 80% aerobic and 20% drills. The periodization approach will follow a 2 weeks progressive load, 1 week consolidation pattern. To ensure effective technique development, it's crucial to prioritize water confidence and basic technique over volume, and maintain generous rest intervals of 20-30 seconds to prevent technique breakdown. Additionally, incorporating short reps of 1-4 lengths will enable full technique focus on each rep, laying the foundation for increased volume before progressing to higher intensity."
+    },
+    "beginner_technique": {
+      "level": "beginner",
+      "goal": "technique",
+      "volume_per_session_lengths": {
+        "min": 16,
+        "max": 28
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 60,
+        "z2_threshold_pct": 0,
+        "z3_speed_pct": 0,
+        "drill_technique_pct": 40
+      },
+      "periodization": {
+        "pattern": "Flat load \u2014 consistent volume each week, drills rotate",
+        "max_weekly_volume_increase_pct": 5,
+        "deload_volume_multiplier": 0.9
+      },
+      "session_structure": {
+        "warmup_pct": 20,
+        "main_set_pct": 55,
+        "cooldown_pct": 25
+      },
+      "rep_length_range": [
+        1,
+        2
+      ],
+      "rest_seconds": {
+        "easy": 30,
+        "moderate": 45,
+        "hard": 60
+      },
+      "recommended_drills": [
+        {
+          "name": "catch-up drill",
+          "purpose": "stroke timing and front quadrant swimming"
+        },
+        {
+          "name": "single-arm freestyle",
+          "purpose": "isolating pull mechanics"
+        },
+        {
+          "name": "fist drill",
+          "purpose": "forearm awareness in the catch phase"
+        },
+        {
+          "name": "head-lead side kick",
+          "purpose": "body rotation and balance"
+        },
+        {
+          "name": "3-3-3 drill",
+          "purpose": "structured rotation and stroke count awareness"
+        }
+      ],
+      "key_principles": [
+        "Low volume \u2014 quality of each stroke matters more than distance covered",
+        "Long rest intervals allow full mental reset between drill reps",
+        "Alternate drill and swim reps to transfer technique immediately",
+        "Focus on one technique cue per session, not multiple at once",
+        "Count strokes per length to track efficiency improvement"
+      ],
+      "coaching_summary": "For a beginner-focused technique development program, aim for a volume range of 16-28 lengths per session in a 25m pool, with an intensity balance of 60% aerobic and 40% drills. A flat load periodization approach is used, where the volume remains consistent each week, but drills are rotated to keep the training engaging and prevent plateaus. The key principle is to prioritize the quality of each stroke over distance covered, focusing on low volume and allowing for long rest intervals to enable a full mental reset between drill reps. Additionally, it's crucial to focus on one technique cue per session, such as improving stroke efficiency by counting strokes per length, to ensure effective technique transfer and progression."
+    },
+    "beginner_speed": {
+      "level": "beginner",
+      "goal": "speed",
+      "volume_per_session_lengths": {
+        "min": 18,
+        "max": 30
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 65,
+        "z2_threshold_pct": 10,
+        "z3_speed_pct": 5,
+        "drill_technique_pct": 20
+      },
+      "periodization": {
+        "pattern": "2 weeks base, 1 week introduce speed work, repeat",
+        "max_weekly_volume_increase_pct": 8,
+        "deload_volume_multiplier": 0.85
+      },
+      "session_structure": {
+        "warmup_pct": 25,
+        "main_set_pct": 60,
+        "cooldown_pct": 15
+      },
+      "rep_length_range": [
+        1,
+        2
+      ],
+      "rest_seconds": {
+        "easy": 30,
+        "moderate": 45,
+        "hard": 90
+      },
+      "recommended_drills": [
+        {
+          "name": "catch-up drill",
+          "purpose": "technique base before speed work"
+        },
+        {
+          "name": "sprint with full rest",
+          "purpose": "introduce fast turnover, 1 length at a time"
+        },
+        {
+          "name": "kick sprint",
+          "purpose": "leg power development"
+        }
+      ],
+      "key_principles": [
+        "Build aerobic base first \u2014 speed without base leads to injury and poor form",
+        "Speed reps must be short (1\u20132 lengths) with full rest so quality is maintained",
+        "Never sprint more than 10% of total session volume at beginner level",
+        "Focus on stroke rate increase, not stroke length shortening"
+      ],
+      "coaching_summary": "For a beginner swimmer aiming to improve speed, a suitable training plan involves sessions with 18-30 lengths in a 25m pool, balancing intensity at 65% aerobic, 10% threshold, 5% speed, and 20% drills. The periodization approach will follow a 2-week base building phase, followed by a 1-week introduction to speed work, repeating this cycle. A key principle is to prioritize building an aerobic base before introducing speed work to avoid injury and poor form. Additionally, speed reps should be short, lasting 1-2 lengths, with full rest in between to maintain quality, and should not exceed 10% of the total session volume."
+    },
+    "beginner_race_prep": {
+      "level": "beginner",
+      "goal": "race_prep",
+      "volume_per_session_lengths": {
+        "min": 20,
+        "max": 34
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 70,
+        "z2_threshold_pct": 15,
+        "z3_speed_pct": 5,
+        "drill_technique_pct": 10
+      },
+      "periodization": {
+        "pattern": "3-week build, 1-week taper. Final week: 60\u201370% of peak volume, maintain intensity",
+        "max_weekly_volume_increase_pct": 10,
+        "deload_volume_multiplier": 0.65,
+        "taper_week": true,
+        "taper_principles": [
+          "Reduce volume by 30\u201340% in final week",
+          "Maintain intensity \u2014 do not cut speed work",
+          "Include at least one race-pace set in taper week",
+          "Rest 48h before race day"
+        ]
+      },
+      "session_structure": {
+        "warmup_pct": 20,
+        "main_set_pct": 65,
+        "cooldown_pct": 15
+      },
+      "rep_length_range": [
+        1,
+        4
+      ],
+      "rest_seconds": {
+        "easy": 20,
+        "moderate": 35,
+        "hard": 60
+      },
+      "recommended_drills": [
+        {
+          "name": "race-pace 1-length efforts",
+          "purpose": "feel for target pace"
+        },
+        {
+          "name": "push-off and glide",
+          "purpose": "practise underwater start"
+        },
+        {
+          "name": "turn practice",
+          "purpose": "efficient wall contact and push-off"
+        }
+      ],
+      "key_principles": [
+        "Include at least one race-pace set per week from week 2 onward",
+        "Practise turns and starts in every session \u2014 race time is won on the walls",
+        "Taper volume but not intensity in the final week",
+        "Underwater dolphin kicks off every wall are high-value for beginners \u2014 practise daily"
+      ],
+      "coaching_summary": "For a beginner athlete preparing for a race, training sessions should consist of 20-34 lengths in a 25m pool, with an intensity balance of 70% aerobic, 15% threshold, 5% speed, and 10% drills. A periodization approach of 3-week build followed by 1-week taper, where the final week's volume is reduced to 60-70% of peak, while maintaining intensity, is recommended. The key principle of including at least one race-pace set per week from week 2 onward is crucial, as is practising turns and starts in every session, with a focus on underwater dolphin kicks off every wall to maximize efficiency. By following this structure, athletes can optimize their training and improve their overall race performance."
+    },
+    "intermediate_endurance": {
+      "level": "intermediate",
+      "goal": "endurance",
+      "volume_per_session_lengths": {
+        "min": 36,
+        "max": 60
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 70,
+        "z2_threshold_pct": 20,
+        "z3_speed_pct": 0,
+        "drill_technique_pct": 10
+      },
+      "periodization": {
+        "pattern": "3 weeks progressive load, 1 week deload",
+        "max_weekly_volume_increase_pct": 10,
+        "deload_volume_multiplier": 0.8
+      },
+      "session_structure": {
+        "warmup_pct": 20,
+        "main_set_pct": 65,
+        "cooldown_pct": 15
+      },
+      "rep_length_range": [
+        2,
+        6
+      ],
+      "rest_seconds": {
+        "easy": 15,
+        "moderate": 30,
+        "hard": 45
+      },
+      "recommended_drills": [
+        {
+          "name": "pull buoy freestyle",
+          "purpose": "isolate upper body, build pull strength"
+        },
+        {
+          "name": "paddles with pull buoy",
+          "purpose": "overload catch and pull phase"
+        },
+        {
+          "name": "fist drill",
+          "purpose": "forearm sensitivity in the catch"
+        },
+        {
+          "name": "descending set",
+          "purpose": "negative split training and pace awareness"
+        },
+        {
+          "name": "bilateral breathing",
+          "purpose": "stroke symmetry and balance"
+        }
+      ],
+      "key_principles": [
+        "Main sets should be continuous aerobic efforts \u2014 200\u2013400m equivalent blocks",
+        "Introduce threshold sets (Z2) from week 2 onward at 15\u201320% of volume",
+        "Pull buoy sets twice per week build pull power without adding leg fatigue",
+        "Negative split every main set \u2014 first half slower than second half"
+      ],
+      "coaching_summary": "For an intermediate endurance swimmer, a suitable training plan involves 36-60 lengths per session, with an intensity balance of 70% aerobic, 20% threshold, and 10% drills. The plan follows a periodization approach of 3 weeks of progressive load, followed by 1 week of deload. A key principle is to structure main sets as continuous aerobic efforts of 200-400m equivalent blocks, with a focus on negative splitting, where the first half is slower than the second half. Additionally, incorporating pull buoy sets twice a week is crucial to build pull power without adding leg fatigue, laying the foundation for threshold sets introduced from week 2 onward."
+    },
+    "intermediate_speed": {
+      "level": "intermediate",
+      "goal": "speed",
+      "volume_per_session_lengths": {
+        "min": 32,
+        "max": 52
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 55,
+        "z2_threshold_pct": 25,
+        "z3_speed_pct": 10,
+        "drill_technique_pct": 10
+      },
+      "periodization": {
+        "pattern": "2 weeks aerobic base, 2 weeks speed development, 1 week recovery, repeat",
+        "max_weekly_volume_increase_pct": 8,
+        "deload_volume_multiplier": 0.8
+      },
+      "session_structure": {
+        "warmup_pct": 20,
+        "main_set_pct": 65,
+        "cooldown_pct": 15
+      },
+      "rep_length_range": [
+        1,
+        4
+      ],
+      "rest_seconds": {
+        "easy": 15,
+        "moderate": 30,
+        "hard": 60
+      },
+      "recommended_drills": [
+        {
+          "name": "sprint 25s with full rest",
+          "purpose": "maximum velocity development"
+        },
+        {
+          "name": "resistance band pull",
+          "purpose": "power in the pull phase"
+        },
+        {
+          "name": "tempo trainer drill",
+          "purpose": "stroke rate development"
+        },
+        {
+          "name": "underwater dolphin kicks",
+          "purpose": "explosive off-wall speed"
+        }
+      ],
+      "key_principles": [
+        "Speed sets require FULL rest \u2014 do not cut rest on sprint reps",
+        "Underwater dolphin kicks off every wall are critical for speed \u2014 minimum 3\u20135 kicks",
+        "Include one threshold set (Z2) and one speed set (Z3) per session in build weeks",
+        "Volume is secondary to quality \u2014 do fewer reps at proper speed rather than more at reduced pace"
+      ],
+      "coaching_summary": "For an intermediate swimmer aiming to improve speed, a typical training session should consist of 32-52 lengths in a 25m pool, with an intensity balance of 55% aerobic, 25% threshold, 10% speed, and 10% drills. The periodization approach will follow a 2-week aerobic base, 2-week speed development, and 1-week recovery cycle, repeated throughout the training period. To achieve speed gains, it's crucial to prioritize quality over volume, ensuring that speed sets are performed with full rest and incorporating key drills such as underwater dolphin kicks off every wall, aiming for a minimum of 3-5 kicks. Additionally, including one threshold set and one speed set per session in build weeks is essential, with a focus on proper technique and pace rather than completing a high number of reps at a reduced speed."
+    },
+    "intermediate_technique": {
+      "level": "intermediate",
+      "goal": "technique",
+      "volume_per_session_lengths": {
+        "min": 28,
+        "max": 44
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 55,
+        "z2_threshold_pct": 10,
+        "z3_speed_pct": 0,
+        "drill_technique_pct": 35
+      },
+      "periodization": {
+        "pattern": "Focus on one technique element per week. Weeks rotate: catch \u2192 pull \u2192 rotation \u2192 kick \u2192 turns",
+        "max_weekly_volume_increase_pct": 5,
+        "deload_volume_multiplier": 0.85
+      },
+      "session_structure": {
+        "warmup_pct": 20,
+        "main_set_pct": 55,
+        "cooldown_pct": 25
+      },
+      "rep_length_range": [
+        2,
+        4
+      ],
+      "rest_seconds": {
+        "easy": 20,
+        "moderate": 35,
+        "hard": 50
+      },
+      "recommended_drills": [
+        {
+          "name": "catch-up drill",
+          "purpose": "front quadrant swimming and stroke timing"
+        },
+        {
+          "name": "fist drill",
+          "purpose": "forearm catch sensitivity"
+        },
+        {
+          "name": "single-arm freestyle",
+          "purpose": "full isolation of one side"
+        },
+        {
+          "name": "6-1-6 drill",
+          "purpose": "side kick to rotation transition"
+        },
+        {
+          "name": "stroke count sets",
+          "purpose": "efficiency and distance-per-stroke tracking"
+        }
+      ],
+      "key_principles": [
+        "One focal technique point per session \u2014 not multiple cues simultaneously",
+        "Alternate drill rep and full-stroke rep to immediately transfer the skill",
+        "Track stroke count per length to measure efficiency gains over weeks",
+        "Cooldown should include slow, deliberate swimming with the session's technique focus"
+      ],
+      "coaching_summary": "For an intermediate swimmer focusing on technique, a suitable training plan involves 28-44 lengths per session in a 25m pool, with an intensity balance of 55% aerobic, 10% threshold, and 35% drills. The periodization approach rotates weekly, concentrating on one technique element at a time, such as catch, pull, rotation, kick, or turns. A key principle is to focus on one focal technique point per session, avoiding multiple cues simultaneously, and to alternate drill reps with full-stroke reps to facilitate immediate skill transfer. Additionally, tracking stroke count per length is crucial to measure efficiency gains over weeks, ensuring the swimmer is applying the technique correctly and making progress."
+    },
+    "intermediate_race_prep": {
+      "level": "intermediate",
+      "goal": "race_prep",
+      "volume_per_session_lengths": {
+        "min": 34,
+        "max": 56
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 55,
+        "z2_threshold_pct": 30,
+        "z3_speed_pct": 10,
+        "drill_technique_pct": 5
+      },
+      "periodization": {
+        "pattern": "3-week build, 1-week taper. Include race-pace sets from week 1.",
+        "max_weekly_volume_increase_pct": 10,
+        "deload_volume_multiplier": 0.65,
+        "taper_week": true,
+        "taper_principles": [
+          "Reduce volume by 35% in final week",
+          "Keep all intensity \u2014 cut reps, not pace",
+          "Include one full race-pace simulation set",
+          "Rest 48h before race day",
+          "Shorten warm-up in taper week sessions"
+        ]
+      },
+      "session_structure": {
+        "warmup_pct": 20,
+        "main_set_pct": 65,
+        "cooldown_pct": 15
+      },
+      "rep_length_range": [
+        2,
+        8
+      ],
+      "rest_seconds": {
+        "easy": 15,
+        "moderate": 30,
+        "hard": 60
+      },
+      "recommended_drills": [
+        {
+          "name": "race-pace sets",
+          "purpose": "develop and cement target pace feel"
+        },
+        {
+          "name": "descending pace sets",
+          "purpose": "practise negative splits"
+        },
+        {
+          "name": "broken swims",
+          "purpose": "experience race pace with minimal rest"
+        },
+        {
+          "name": "turn sets",
+          "purpose": "wall efficiency under race conditions"
+        }
+      ],
+      "key_principles": [
+        "Every session from week 1 should include at least 4 lengths at goal race pace",
+        "Underwater dolphin kicks after every turn \u2014 aim for 5\u20137 kicks minimum",
+        "Practise race-start dive or push-off in every session if pool permits",
+        "Mental race rehearsal: visualise the race during the last 100m of main set"
+      ],
+      "coaching_summary": "For an intermediate swimmer preparing for a race, a suitable training plan should consist of sessions with a volume of 34-56 lengths in a 25m pool, balancing intensity across aerobic (55%), threshold (30%), speed (10%), and drills (5%). The plan should follow a 3-week build and 1-week taper periodization approach, incorporating race-pace sets from the outset. A key principle is to include at least 4 lengths at goal race pace in every session from week 1, while also emphasizing the importance of underwater dolphin kicks after every turn, aiming for 5-7 kicks minimum. This will help build race-specific endurance and technique, setting the swimmer up for success in their target event."
+    },
+    "advanced_endurance": {
+      "level": "advanced",
+      "goal": "endurance",
+      "volume_per_session_lengths": {
+        "min": 56,
+        "max": 88
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 65,
+        "z2_threshold_pct": 25,
+        "z3_speed_pct": 5,
+        "drill_technique_pct": 5
+      },
+      "periodization": {
+        "pattern": "3 weeks progressive load, 1 week deload. Mesocycle: 4 weeks base, 4 weeks build.",
+        "max_weekly_volume_increase_pct": 8,
+        "deload_volume_multiplier": 0.75
+      },
+      "session_structure": {
+        "warmup_pct": 15,
+        "main_set_pct": 75,
+        "cooldown_pct": 10
+      },
+      "rep_length_range": [
+        4,
+        12
+      ],
+      "rest_seconds": {
+        "easy": 10,
+        "moderate": 20,
+        "hard": 40
+      },
+      "recommended_drills": [
+        {
+          "name": "paddles and pull buoy",
+          "purpose": "pulling power overload"
+        },
+        {
+          "name": "threshold pyramid sets",
+          "purpose": "sustained Z2 effort tolerance"
+        },
+        {
+          "name": "descending 100s",
+          "purpose": "pace control and negative splitting"
+        },
+        {
+          "name": "CSS (Critical Swim Speed) sets",
+          "purpose": "threshold development at race-specific pace"
+        }
+      ],
+      "key_principles": [
+        "Main sets are long continuous blocks: 400\u2013800m equivalent at Z1/Z2",
+        "CSS (critical swim speed) should anchor all threshold sets",
+        "Deload weeks must genuinely reduce volume \u2014 advanced swimmers often overtrain during recovery",
+        "Long cooldown is essential for recovery at this training load"
+      ],
+      "coaching_summary": "For advanced swimmers focusing on endurance, training sessions should consist of 56-88 lengths in a 25m pool, with an intensity balance of 65% aerobic, 25% threshold, 5% speed, and 5% drills. A periodization approach of 3 weeks of progressive load followed by 1 week of deload, repeated over a 4-week base and 4-week build mesocycle, will help achieve optimal endurance. It's crucial to anchor threshold sets with Critical Swim Speed (CSS) and prioritize long continuous blocks of 400-800m at low to moderate intensity. Additionally, a long cooldown is essential for recovery at this high training load, and deload weeks must genuinely reduce volume to avoid overtraining."
+    },
+    "advanced_speed": {
+      "level": "advanced",
+      "goal": "speed",
+      "volume_per_session_lengths": {
+        "min": 48,
+        "max": 76
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 50,
+        "z2_threshold_pct": 25,
+        "z3_speed_pct": 20,
+        "drill_technique_pct": 5
+      },
+      "periodization": {
+        "pattern": "2 weeks base, 2 weeks speed, 1 week recovery. Rotate mesocycles.",
+        "max_weekly_volume_increase_pct": 8,
+        "deload_volume_multiplier": 0.7
+      },
+      "session_structure": {
+        "warmup_pct": 20,
+        "main_set_pct": 65,
+        "cooldown_pct": 15
+      },
+      "rep_length_range": [
+        1,
+        6
+      ],
+      "rest_seconds": {
+        "easy": 15,
+        "moderate": 30,
+        "hard": 90
+      },
+      "recommended_drills": [
+        {
+          "name": "resisted sprint (band or drag sock)",
+          "purpose": "power output under load"
+        },
+        {
+          "name": "max velocity 12.5m sprint",
+          "purpose": "pure top speed development"
+        },
+        {
+          "name": "underwater dolphin kick series",
+          "purpose": "explosive undulation from every wall"
+        },
+        {
+          "name": "assisted swim (parachute release)",
+          "purpose": "overspeed training for stroke rate"
+        }
+      ],
+      "key_principles": [
+        "Sprint sets must use full rest \u2014 never shorten rest to fit more reps",
+        "Underwater dolphin kicks: 7\u201310 kicks from every wall, maximum power",
+        "Speed sessions require 48h recovery \u2014 schedule carefully across the week",
+        "Max velocity work (Z3) should not exceed 15% of weekly volume"
+      ],
+      "coaching_summary": "For advanced swimmers targeting speed, training sessions should comprise 48-76 lengths of a 25m pool, with a balanced intensity distribution of 50% aerobic, 25% threshold, 20% speed, and 5% drills. A periodized approach will be used, rotating between 2 weeks of base training, 2 weeks of speed-focused training, and 1 week of recovery. To optimize speed development, it is crucial to prioritize full rest during sprint sets, never shortening rest periods to accommodate additional reps. Additionally, speed sessions require careful scheduling to allow for 48 hours of recovery time, ensuring that athletes can perform at maximum intensity."
+    },
+    "advanced_technique": {
+      "level": "advanced",
+      "goal": "technique",
+      "volume_per_session_lengths": {
+        "min": 44,
+        "max": 68
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 55,
+        "z2_threshold_pct": 20,
+        "z3_speed_pct": 0,
+        "drill_technique_pct": 25
+      },
+      "periodization": {
+        "pattern": "Each week targets one technical system: catch mechanics \u2192 body rotation \u2192 kick timing \u2192 breathing pattern \u2192 turns and walls",
+        "max_weekly_volume_increase_pct": 5,
+        "deload_volume_multiplier": 0.85
+      },
+      "session_structure": {
+        "warmup_pct": 20,
+        "main_set_pct": 60,
+        "cooldown_pct": 20
+      },
+      "rep_length_range": [
+        2,
+        6
+      ],
+      "rest_seconds": {
+        "easy": 15,
+        "moderate": 30,
+        "hard": 45
+      },
+      "recommended_drills": [
+        {
+          "name": "catch-up with tempo trainer",
+          "purpose": "stroke rate and timing precision"
+        },
+        {
+          "name": "DPS (distance per stroke) sets",
+          "purpose": "efficiency optimisation under fatigue"
+        },
+        {
+          "name": "underwater video review drills",
+          "purpose": "proprioceptive feedback calibration"
+        },
+        {
+          "name": "broken 200s",
+          "purpose": "technique maintenance under near-race conditions"
+        }
+      ],
+      "key_principles": [
+        "At advanced level, small technique gains yield large time improvements",
+        "DPS (distance per stroke) is the key metric \u2014 track strokes per length every session",
+        "Pair drill with threshold swimming to test technique retention under effort",
+        "Turns and walls: every push-off is a technique opportunity \u2014 never coast"
+      ],
+      "coaching_summary": "For advanced swimmers focusing on technique, each session should comprise 44-68 lengths in a 25m pool, with an intensity balance of 55% aerobic, 20% threshold, and 25% drills. The periodization approach will target one technical system per week, rotating through catch mechanics, body rotation, kick timing, breathing pattern, and turns and walls. A key principle is that small technique gains can yield significant time improvements, and tracking strokes per length every session is crucial, with a focus on distance per stroke (DPS) as the primary metric. By pairing drills with threshold swimming, technique retention under effort can be effectively tested, and it's essential to prioritize proper technique on every push-off, never coasting, to maximize efficiency and speed."
+    },
+    "advanced_race_prep": {
+      "level": "advanced",
+      "goal": "race_prep",
+      "volume_per_session_lengths": {
+        "min": 52,
+        "max": 80
+      },
+      "intensity_distribution": {
+        "z1_aerobic_pct": 45,
+        "z2_threshold_pct": 35,
+        "z3_speed_pct": 15,
+        "drill_technique_pct": 5
+      },
+      "periodization": {
+        "pattern": "4-week build, 1-week peak, 1-week taper. Race-pace sets mandatory from week 1.",
+        "max_weekly_volume_increase_pct": 8,
+        "deload_volume_multiplier": 0.6,
+        "taper_week": true,
+        "taper_principles": [
+          "Reduce volume by 40% in final week",
+          "All intensity sessions maintained \u2014 cut reps not pace",
+          "One full race simulation on day 4 of taper week",
+          "Rest 48\u201372h before race",
+          "Sharpening sprint sets (3\u20134 x 1 length max effort) on day 2 of taper"
+        ]
+      },
+      "session_structure": {
+        "warmup_pct": 18,
+        "main_set_pct": 68,
+        "cooldown_pct": 14
+      },
+      "rep_length_range": [
+        2,
+        10
+      ],
+      "rest_seconds": {
+        "easy": 10,
+        "moderate": 25,
+        "hard": 60
+      },
+      "recommended_drills": [
+        {
+          "name": "broken race swims",
+          "purpose": "race-pace exposure with micro-rest"
+        },
+        {
+          "name": "CSS descending sets",
+          "purpose": "building to and beyond race pace"
+        },
+        {
+          "name": "relay-start practice",
+          "purpose": "explosive entry and breakout timing"
+        },
+        {
+          "name": "15m underwater from push",
+          "purpose": "maximise underwater phase at race speed"
+        }
+      ],
+      "key_principles": [
+        "Underwater dolphin kicks: 7\u201310 powerful kicks from every wall \u2014 race margins live here",
+        "Every session includes race-pace exposure \u2014 no session is purely aerobic in race prep",
+        "Peak week: highest intensity, not highest volume",
+        "Taper without losing sharpness: reduce length of sets, keep the pace targets"
+      ],
+      "coaching_summary": "For advanced swimmers preparing for a race, training sessions should consist of 52-80 lengths in a 25m pool, with an intensity balance of 45% aerobic, 35% threshold, 15% speed, and 5% drills. The 6-week periodization approach includes a 4-week build, 1-week peak, and 1-week taper, with race-pace sets incorporated from the outset. A key principle is to prioritize underwater dolphin kicks, aiming for 7-10 powerful kicks from every wall to maximize race margins. Additionally, every session must include race-pace exposure to maintain sharpness, and during peak week, intensity should be at its highest, rather than volume."
+    }
+  }
+}

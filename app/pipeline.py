@@ -1,15 +1,8 @@
-"""
-Swimming coach — 3-step agentic pipeline
-
-Step 1: run_periodization_agent - profile  → macro structure (week themes + intensity curve)
-Step 2: run_session_agent - macro → individual sessions with sets in pool lengths
-Step 3: run_coaching_agent - sessions → dolphin kick cues, technique focus, coaching notes
-"""
-
 import json
 import re
 from app.llm import get_client, MODEL_ID
 from app.models import SwimmerProfile, TrainingPlan, Week, Session, SetItem
+from app.knowledge import get_coaching_summary
 
 
 def _clean_json(text: str) -> str:
@@ -20,15 +13,18 @@ def _clean_json(text: str) -> str:
 
 
 async def run_periodization_agent(profile: SwimmerProfile) -> dict:
-    """
-    Decides the macro training structure for the full plan.
-    One LLM call → week themes, intensity levels, volume multipliers.
-    """
     client = get_client()
 
     taper_rule = (
         "The FINAL week must be a taper: theme='Taper', intensity='taper', volume_multiplier=0.7."
         if profile.goal.value == "race_prep"
+        else ""
+    )
+
+    grounding = get_coaching_summary(profile.level.value, profile.goal.value)
+    grounding_block = (
+        f"\nEstablished coaching guidance for this swimmer type:\n{grounding}\n"
+        if grounding
         else ""
     )
 
@@ -46,9 +42,10 @@ async def run_periodization_agent(profile: SwimmerProfile) -> dict:
 - Goal: {profile.goal.value.replace("_", " ")}
 - Sessions/week: {profile.sessions_per_week}
 - Session duration: {profile.session_duration_minutes} min
-- Pool: {profile.pool_length}m
+- Pool: {profile.pool_length.value}m
 - Stroke: {profile.stroke_focus}
 - Notes: {profile.notes or "none"}
+{grounding_block}
 {taper_rule}
 
 Rules:
@@ -57,6 +54,7 @@ Rules:
 - Beginner: max intensity "moderate"
 - Apply progressive overload; include a deload (volume_multiplier ≤ 0.9) every 3–4 weeks
 - Use specific theme names: "Aerobic Base", "Threshold Development", "Speed Endurance", "Race Pace", "Recovery", "Taper"
+- Follow the established coaching guidance above where provided — it reflects real periodization practice for this swimmer type
 
 Return ONLY this JSON:
 {{"weeks": [{{"week_number": 1, "theme": "Aerobic Base", "intensity": "low", "volume_multiplier": 1.0}}]}}""",
@@ -83,6 +81,11 @@ async def run_session_agent(profile: SwimmerProfile, macro: dict) -> list[dict]:
         "intermediate": "Use moderate rep lengths: 4–6 lengths per rep.",
         "advanced": "Can use longer reps: 4–8 lengths per rep.",
     }[profile.level.value]
+
+    grounding = get_coaching_summary(profile.level.value, profile.goal.value)
+    grounding_note = (
+        f"\nReference coaching context: {grounding}\n" if grounding else ""
+    )
 
     schema = (
         '{"sessions": [{"day_label": "Session 1", "total_lengths": 40, '
@@ -112,10 +115,10 @@ async def run_session_agent(profile: SwimmerProfile, macro: dict) -> list[dict]:
 Week context:
 - Theme: {week_data["theme"]}
 - Intensity: {week_data["intensity"]}
-- Target volume per session: ~{vol} lengths (1 length = {profile.pool_length}m)
+- Target volume per session: ~{vol} lengths (1 length = {profile.pool_length.value}m)
 - Swimmer: {profile.level.value}, goal = {profile.goal.value.replace("_", " ")}
 - Stroke focus: {profile.stroke_focus}
-
+{grounding_note}
 Rules:
 - Distances in LENGTHS only, never metres
 - total_lengths = sum of (reps × lengths_per_rep) across all three phases
@@ -186,7 +189,7 @@ async def run_coaching_agent(profile: SwimmerProfile, weeks: list[dict]) -> list
                 "role": "user",
                 "content": f"""Write a coaching note for each session below.
 
-Swimmer: {profile.level.value}, goal = {profile.goal.value.replace("_", " ")}, stroke = {profile.stroke_focus}, pool = {profile.pool_length}m
+Swimmer: {profile.level.value}, goal = {profile.goal.value.replace("_", " ")}, stroke = {profile.stroke_focus}, pool = {profile.pool_length.value}m
 
 Each note MUST:
 - Be 2-3 sentences
@@ -224,7 +227,6 @@ Return ONLY this JSON with exactly {total_sessions} notes in order:
 
 
 async def generate_plan(profile: SwimmerProfile) -> TrainingPlan:
-    """Chains the three agents and assembles the final TrainingPlan."""
     macro = await run_periodization_agent(profile)
     weeks_raw = await run_session_agent(profile, macro)
     weeks_enriched = await run_coaching_agent(profile, weeks_raw)
