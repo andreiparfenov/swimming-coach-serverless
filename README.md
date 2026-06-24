@@ -13,43 +13,43 @@ Built with two Nebius Serverless AI components:
 ┌──────────────────────────────────────────────────────────────────┐
 │  Nebius Serverless JOB  (job/process_training_data.py)           │
 │  Runs once, to completion. Compute releases when it's done.      │
-│                                                                    │
+│                                                                  │
 │  job/seed_data/training_principles.json (12 level×goal profiles) │
-│           │                                                        │
-│           ▼                                                        │
-│  For each profile: 1 LLM call → compress into a coaching summary  │
-│           │                                                        │
-│           ▼                                                        │
-│  knowledge_base.json  →  uploaded to Nebius Object Storage         │
+│           │                                                      │
+│           ▼                                                      │
+│  For each profile: 1 LLM call → compress into a coaching summary │
+│           │                                                      │
+│           ▼                                                      │
+│  knowledge_base.json  →  uploaded to Nebius Object Storage       │
 └──────────────────────────────────────────────────────────────────┘
                               │
                               ▼
 ┌──────────────────────────────────────────────────────────────────┐
 │  Nebius Serverless ENDPOINT  (app/main.py)                       │
-│  Long-running HTTP service, stays up between requests.            │
-│  Fetches knowledge_base.json from Object Storage on first use     │
-│  after each container start (falls back to a bundled copy at      │
-│  app/data/ if storage is unreachable or credentials are unset).   │
-│                                                                    │
-│  POST /generate-plan                                              │
-│        │                                                            │
-│        ▼                                                            │
-│  Step 1: Periodization agent                                      │
-│    profile + knowledge-base coaching summary → week themes,       │
-│    intensity curve, volume multipliers. One LLM call.             │
-│        │                                                            │
-│        ▼                                                            │
-│  Step 2: Session generator agent                                  │
-│    macro structure → warmup/main set/cooldown in pool lengths,    │
-│    grounded by the same coaching summary. One LLM call per week.  │
-│        │                                                            │
-│        ▼                                                            │
-│  Step 3: Coaching notes agent                                     │
-│    sessions → dolphin kick cues, technique focus, encouragement.  │
-│    One batch LLM call.                                            │
-│        │                                                            │
-│        ▼                                                            │
-│  TrainingPlan JSON                                                 │
+│  Long-running HTTP service, stays up between requests.           │
+│  Fetches knowledge_base.json from Object Storage on first use    │
+│  after each container start (falls back to a bundled copy at     │
+│  app/data/ if storage is unreachable or credentials are unset).  │
+│                                                                  │
+│  POST /generate-plan                                             │
+│        │                                                         │
+│        ▼                                                         │
+│  Step 1: Periodization agent                                     │
+│    profile + knowledge-base coaching summary → week themes,      │
+│    intensity curve, volume multipliers. One LLM call.            │
+│        │                                                         │
+│        ▼                                                         │
+│  Step 2: Session generator agent                                 │
+│    macro structure → warmup/main set/cooldown in pool lengths,   │
+│    grounded by the same coaching summary. One LLM call per week. │
+│        │                                                         │
+│        ▼                                                         │
+│  Step 3: Coaching notes agent                                    │
+│    sessions → dolphin kick cues, technique focus, encouragement. │
+│    One batch LLM call.                                           │
+│        │                                                         │
+│        ▼                                                         │
+│  TrainingPlan JSON                                               │
 └──────────────────────────────────────────────────────────────────┘
 ```
 
