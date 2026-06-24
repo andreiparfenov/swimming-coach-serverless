@@ -201,3 +201,7 @@ Then open [http://localhost:8000/docs](http://localhost:8000/docs) for the inter
 ├── requirements.txt
 └── env.example
 ```
+
+## User demo
+
+Available on https://swimming-coach-iota.vercel.app
