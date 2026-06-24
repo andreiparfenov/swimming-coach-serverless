@@ -167,7 +167,7 @@ Then open [http://localhost:8000/docs](http://localhost:8000/docs) for the inter
 
 | Component         | Platform | Preset       | Notes                                                                                                                               |
 | ----------------- | -------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Endpoint (`app/`) | `cpu-d3` | `8vcpu-32gb` | CPU only — no GPU needed, all inference goes through Token Factory. Stays running continuously; billed for uptime, not per-request. |
+| Endpoint (`app/`) | `cpu-e2` | `2vcpu-8gb` | CPU only — no GPU needed, all inference goes through Token Factory. The Endpoint only orchestrates HTTP calls, so the smallest available preset is enough; stays running continuously, billed for uptime, not per-request. |
 | Job (`job/`)      | `cpu-d3` | `4vcpu-16gb` | Runs to completion, then compute is released automatically — billed only for actual runtime.                                        |
 
 **Approximate runtime:**
@@ -175,7 +175,7 @@ Then open [http://localhost:8000/docs](http://localhost:8000/docs) for the inter
 - Job: ~1–3 minutes total (12 sequential Token Factory calls, each capped at 200 output tokens, plus one upload to Object Storage).
 - Endpoint, per `/generate-plan` request: each step is a sequential LLM call — 1 periodization + 1 per week + 1 batch coaching-notes call — so total latency scales with plan length. Measured end-to-end for a 4-week plan: **~3 minutes** (6 sequential calls, ~30s average each). A 2-week plan (4 calls) takes roughly half that. Plan for a few minutes per request, not seconds — this is the cost of correctness over a single giant prompt, not an inefficiency to optimise away lightly.
 
-**Cost:** both components run on CPU-only presets, with the LLM cost coming from Token Factory's per-token pricing. The Job's cost is bounded by its few-minute one-time runtime, while the Endpoint's ongoing cost is the `8vcpu-32gb` preset's hourly rate for however long you keep it running, plus per-request Token Factory usage.
+**Cost:** both components run on CPU-only presets, with the LLM cost coming from Token Factory's per-token pricing. The Job's cost is bounded by its few-minute one-time runtime, while the Endpoint's ongoing cost is the `2vcpu-8gb` preset's hourly rate for however long you keep it running, plus per-request Token Factory usage. Sized to the smallest preset available on a non-GPU platform, since the Endpoint does no local compute beyond orchestrating outbound calls — `nebius ai endpoint stop` whenever it's not needed stops that cost entirely.
 
 ## Project structure
 

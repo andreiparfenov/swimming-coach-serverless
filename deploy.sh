@@ -30,8 +30,8 @@ echo "▶ Creating Nebius endpoint..."
 nebius ai endpoint create \
   --name "$ENDPOINT_NAME" \
   --image "$FULL_IMAGE" \
-  --platform cpu-d3 \
-  --preset 8vcpu-32gb \
+  --platform cpu-e2 \
+  --preset 2vcpu-8gb \
   --public \
   --container-port "$CONTAINER_PORT" \
   --subnet-id "$SUBNET_ID" \
